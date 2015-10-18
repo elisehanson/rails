@@ -1,0 +1,27 @@
+<h1>User Edit</h1>
+
+<ul>
+<%= form_for @user, method: :put do |form| %>
+  <li>
+    <%= form.label :fname %>
+    <%= form.text_field :fname %>
+  </li>
+
+  <li>
+    <%= form.label :lname %>
+    <%= form.text_field :lname %>
+  </li>
+
+  <li>
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+  </li>
+
+  <li>
+    <%= form.label :password %>
+    <%= form.text_field :password %>
+  </li>
+
+  <%= form.submit :edit %>
+<% end %>
+</ul>
