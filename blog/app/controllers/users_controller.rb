@@ -8,13 +8,20 @@ class UsersController < ApplicationController
   # show action
   def show
     @user = User.find params[:id]
+    @posts = current_user.posts
   end
 
   # create action
   def create
-    @user = User.create params[:user]
-    redirect_to @user
+    @user = User.new(user_params)
+      if @user.save
+        session[:user_id] = @user.id
+        redirect_to root_url
+      else
+        redirect_to signup_url
+    end
   end
+  
 
   # show action
   def new
@@ -40,6 +47,13 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
 
+  
+
+  private 
+
+  def user_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation).merge(user: current_user)
+  end 
 
 
 end

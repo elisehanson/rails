@@ -1,5 +1,6 @@
 class Post < ActiveRecord::Base
-
+	
+	belongs_to :users
 	has_many :comments
 	
 	# attr_accessible :content, :name, :title

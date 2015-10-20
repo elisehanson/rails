@@ -1,4 +1,4 @@
-<h1>User Show</h1>
+<h2>User Show</h2>
 
 <strong>Id:</strong> <%= @user.id %><br />
 <strong>Email:</strong> <%= @user.email %><br />
@@ -6,4 +6,16 @@
 <strong>Last Name:</strong> <%= @user.lname %><br />
 <strong>Password:</strong> <%= @user.password %><br />
 
+<%= link_to "Edit User", edit_user_path(@user) %>
 <%= link_to "Delete User", user_path(@user), method: :delete %>
+
+<h2>User's Post's</h2>
+
+<p><% if @posts.present? %>
+   <% @posts.each do |post| %>
+   <%= post.user_id %>
+      <%= post.title %>
+      <%= post.name %>
+      <%= post.content %> <%= link_to 'Show', post %> <br>
+   <% end %>
+<% end %></p>

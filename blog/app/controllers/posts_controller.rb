@@ -1,31 +1,32 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  # before_action :authenticate_post!, :except => [:show, :index]
 
   # GET /posts
   # GET /posts.json
-  def index
-    @posts = Post.all
-  end
+
 
   # GET /posts/1
   # GET /posts/1.json
   def show
+    @post = Post.find(params[:id])
   end
 
   # GET /posts/new
   def new
+
     @post = Post.new
   end
 
   # GET /posts/1/edit
   def edit
+    @post = Post.find(params[:id])
   end
 
   # POST /posts
   # POST /posts.json
   def create
     @post = Post.new(post_params)
-
+    @post.user_id = current_user.id if current_user
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
@@ -35,6 +36,10 @@ class PostsController < ApplicationController
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+    def index
+    @posts = Post.all
   end
 
   # PATCH/PUT /posts/1
@@ -69,6 +74,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:name, :title, :content)
+      params.require(:post).permit(:name, :title, :content).merge(user_id: current_user).merge(user_id: current_user)
     end
 end
