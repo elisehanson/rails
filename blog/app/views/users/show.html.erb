@@ -13,9 +13,22 @@
 
 <p><% if @posts.present? %>
    <% @posts.each do |post| %>
-   <%= post.user_id %>
-      <%= post.title %>
+<!--    <%= post.user_id %> -->
+	<%= @user.email %> 
+	<%= @user.fname %>  
+	<%= post.created_at %><Br> 
+	
+<!--       <%= post.title %> -->
       <%= post.name %>
-      <%= post.content %> <%= link_to 'Show', post %> <br>
+      <%= post.content %> 
+<!--       <%= link_to 'Show', post %>  --><p>
+      <br>
+        <td><%= link_to 'Show', post %></td>
+        <td><%= link_to 'Edit', edit_post_path(post) %></td>
+        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<p>
    <% end %>
 <% end %></p>
+
+<%= link_to 'New Post', new_post_path %>
+ 

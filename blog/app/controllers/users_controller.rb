@@ -19,7 +19,7 @@ class UsersController < ApplicationController
         redirect_to root_url
       else
         redirect_to signup_url
-    end
+      end
   end
   
 
